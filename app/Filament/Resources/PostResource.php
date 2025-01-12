@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\Tag;
 use Filament\Forms;
 use App\Models\Post;
 use Filament\Tables;
@@ -12,6 +13,7 @@ use App\Enums\PostStatus;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use App\Filament\Resources\TagResource;
 use App\Filament\Resources\PostResource\Pages;
 
 class PostResource extends Resource
@@ -41,14 +43,24 @@ class PostResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('feature_image')
                     ->image()
-                    ->columnSpanFull(), 
+                    ->columnSpanFull(),
                 Forms\Components\Select::make('category_id')
                     ->required()
                     ->relationship('category', 'name')
                     ->preload(),
-                Forms\Components\TagsInput::make('tags')
+                Forms\Components\Select::make('tags')
                     ->relationship('tags', 'name')
-                    ->preload(),
+                    ->preload()
+                    ->multiple()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                    ])
+                    ->createOptionUsing(fn(array $data) => Tag::create([
+                        'name' => $data['name'],
+                        'slug' => Str::slug($data['name']),
+                    ])->id),
                 Forms\Components\Select::make('status')
                     ->required()
                     ->options(PostStatus::class)

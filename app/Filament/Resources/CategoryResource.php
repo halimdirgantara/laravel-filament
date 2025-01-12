@@ -48,6 +48,7 @@ class CategoryResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->directory('category_image')
+                    ->maxSize(8*1024)
                     ->preserveFilenames()
                     ->fetchFileInformation(false)
                     ->columnSpan(12),
