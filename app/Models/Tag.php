@@ -18,4 +18,12 @@ class Tag extends Model
         'name',
         'slug',
     ];
+
+    /**
+     * Get the posts that have this tag.
+     */
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }
