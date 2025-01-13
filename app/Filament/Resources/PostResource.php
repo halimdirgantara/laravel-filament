@@ -43,7 +43,11 @@ class PostResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('feature_image')
                     ->image()
-                    ->columnSpanFull(),
+                    ->directory('feature_image')
+                    ->maxSize(8 * 1024)
+                    ->preserveFilenames()
+                    ->fetchFileInformation(false)
+                    ->columnSpan(12),
                 Forms\Components\Select::make('category_id')
                     ->required()
                     ->relationship('category', 'name')

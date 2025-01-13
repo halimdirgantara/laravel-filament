@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Tag;
+use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,10 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'superadmin',
-            'email' => 'superadmin@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
+        User::factory(10)->create();
+        Category::factory(10)->create();
+        Tag::factory(10)->create();
+        $posts =    Post::factory(10)->create();
+        $posts->each(function ($post) {
+            $post->tags()->attach(Tag::inRandomOrder()->first()->id);
+        });
     }
 }
