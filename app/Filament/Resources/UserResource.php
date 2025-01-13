@@ -33,10 +33,14 @@ class UserResource extends Resource
                                             ->maxLength(255), // max char 255
 
                 Forms\Components\TextInput::make('password')
-                                            ->required() // cannot empty
                                             ->password() //  password text input
                                             ->revealable() // hide show password
                                             ->maxLength(255), // max char 255
+
+                Forms\Components\Select::make('roles')
+                                        ->multiple()
+                                        ->relationship('roles', 'name')
+                                        ->preload(),
             ]);
     }
 
