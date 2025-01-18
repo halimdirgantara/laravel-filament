@@ -1,5 +1,8 @@
 <?php
 
+use App\Livewire\Home;
+use App\Livewire\Post\Index as PostIndex;
+use App\Livewire\Post\Show as PostShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', Home::class)->name('home');
+
+Route::get('/post', PostIndex::class)->name('post');
+Route::get('/post/{slug}', PostShow::class)->name('post.show');
+
+Route::get('/category', function () {
+    return 'Category';
+})->name('category');
+
+Route::get('/about', function () {
+    return 'About';
+})->name('about');
