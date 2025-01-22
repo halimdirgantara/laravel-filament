@@ -20,16 +20,16 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
         ]);
 
-        $users = User::factory(20)->create();
+        $users = User::factory(5)->create();
 
         $users->each(function ($user) {
             $user->assignRole(Role::inRandomOrder()->first()->name);
         });
 
-        Category::factory(20)->create();
-        Tag::factory(20)->create();
+        Category::factory(12)->create();
+        Tag::factory(10)->create();
 
-        $posts =    Post::factory(20)->create();
+        $posts = Post::factory(100)->create();
         $posts->each(function ($post) {
             $post->tags()->attach(Tag::inRandomOrder()->first()->id);
         });

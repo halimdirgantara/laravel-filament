@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Livewire\Post;
+namespace App\Livewire\Category;
 
+use App\Models\Category;
 use Livewire\Component;
-use App\Models\Post;
 
 class Index extends Component
 {
@@ -14,7 +14,7 @@ class Index extends Component
     public function mount()
     {
         $this->breadcrumbs = [
-            ['label' => 'Post', 'url' => null]
+            ['label' => 'Category', 'url' => null]
         ];
     }
 
@@ -35,10 +35,10 @@ class Index extends Component
 
     public function render()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(6, ['*'], 'page', $this->page);
+        $categories = Category::orderBy('created_at', 'desc')->paginate(6, ['*'], 'page', $this->page);
 
-        return view('livewire.post.index', [
-            'posts' => $posts
+        return view('livewire.category.index', [
+            'categories' => $categories
         ])->extends('layouts.app')->layoutData(['breadcrumbs' => $this->breadcrumbs]);
     }
 }

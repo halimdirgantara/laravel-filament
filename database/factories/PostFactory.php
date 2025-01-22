@@ -36,8 +36,8 @@ class PostFactory extends Factory
             'body' => fake()->paragraph(),
             'feature_image' => $imageName,
             'status' => 'published',
-            'category_id' => Category::factory(),
-            'created_by' => User::factory(),
+            'category_id' => Category::inRandomOrder()->first()->id,
+            'created_by' => User::inRandomOrder()->first()->id,
         ];
     }
 }

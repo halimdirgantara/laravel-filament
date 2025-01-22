@@ -1,5 +1,5 @@
 <div class="max-w-screen-lg mx-auto mt-6">
-    <h1 class="text-2xl font-bold mb-4">Post List</h1>
+    <h1 class="text-2xl font-bold mb-4">Category : {{ Str::title($category->name) }}</h1>
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
         @foreach ($posts as $post)
             <div class="card group m-2 hover:shadow sm:max-w-sm flex flex-col h-full">
